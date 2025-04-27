@@ -8,10 +8,10 @@ const Nav = ({ setURL, page, setKeyword, setPage }) => {
     page(1);
   }
   return (
-    <div className='flex items-center justify-between gap-2 sticky top-0 left-0 bg-white'>
+    <div className='flex items-center justify-between gap-2 sticky top-0 left-0 bg-black z-20 text-white p-1'>
       <nav>
-        <ul className='flex gap-2'>
-          <li><Link to="/" onClick={reset}>Movie box</Link></li>
+        <ul className='flex gap-2 items-center'>
+          <li><Link to="/" onClick={reset} className='moviebox'>Movie box</Link></li>
           <li><Link to="/genre">Genre</Link></li>
         </ul>
       </nav>

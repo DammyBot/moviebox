@@ -1,7 +1,19 @@
 @import 'tailwindcss';
 
+/* font-family: 'Excon', sans-serif; */
+
+@layer base {
+    body {
+        font-family: 'Ranade', sans-serif;
+        font-weight: light;
+        background-color: black;
+    }
+}
+
 @layer components {
-    
+    .moviebox {
+        @apply font-['Rande'] font-bold text-xl;
+    }
 }
 
 .animate {
@@ -12,7 +24,8 @@
     0% {
         transform: rotate(0deg);
     }
-    100%{
+
+    100% {
         transform: rotate(360deg);
     }
 }
