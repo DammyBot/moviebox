@@ -17,7 +17,7 @@
 }
 
 .animate {
-    animation: spin 3s ease infinite forwards;
+    animation: spin 2s ease-in-out infinite forwards;
 }
 
 @keyframes spin {

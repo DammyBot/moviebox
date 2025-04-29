@@ -1,6 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom"
-import { useEffect, useState } from "react"
-import logo from './images/react.svg'
+import { useEffect, useState, useRef } from "react"
+import Loading from "./components/Loading"
 import Nav from "./components/Nav"
 import Home from "./pages/Home"
 import Movie from "./pages/Movie"
@@ -28,12 +28,17 @@ function App() {
   const [keyword, setKeyword] = useState("")
   // Genre ID
   const [genreID, setGenreID] = useState("");
+  // Back to Top Visibility
+  const [isVisible, setVisibility] = useState(false);
+  const reference = useRef(null);
+  // Loading
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Setting the movie after fetch
     fetch(url)
       .then(res => res.json())
-      .then(res => {console.info(res);setResults(res.results)})
+      .then(res => { console.info(res); setResults(res.results); setLoading(false) })
       .catch(err => console.error(err));
 
     // Setting all the genre available into the genre list
@@ -43,23 +48,35 @@ function App() {
       .catch(e => console.error(e));
   }, [url, page])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisibility(entry.isIntersecting);
+    })
+    if (reference.current) observer.observe(reference.current);
+    return () => {
+      if (reference.current) observer.unobserve(reference.current);
+    }
+  }, [])
+
   return (
     <>
       <Nav setURL={setURL} page={setPage} keyword={keyword} setKeyword={setKeyword} setPage={setPage} />
+      <div className="h-[20vh] absolute -z-50" ref={reference}></div>
 
-      <Routes>
-        <Route path="/" element={<Home result={results} page={page} pageChange={setPage} total={totalPages} updateURL={setURL} setMovie={setMovieInfo} url={url} keyword={keyword} />} />
+      {loading ? <Loading /> : (
+        <Routes>
+          <Route path="/" element={<Home result={results} page={page} pageChange={setPage} total={totalPages} updateURL={setURL} setMovie={setMovieInfo} url={url} keyword={keyword} setLoading={setLoading} />} />
 
-        <Route path="/movie" element={<Movie info={movie} />} />
+          <Route path="/movie" element={<Movie info={movie} />} />
 
-        <Route path="/genre" element={<SelectGenre genre={genre} setURL={setURL} page={page} setPage={setPage} setGenreID={setGenreID} />} />
+          <Route path="/genre" element={<SelectGenre genre={genre} setURL={setURL} page={page} setPage={setPage} setGenreID={setGenreID} />} />
 
-        <Route path="/moviegenre" element={<Genre page={page} updateURL={setURL} setPage={setPage} total={totalPages} genreID={genreID} result={results} setMovie={setMovieInfo} />} />
+          <Route path="/moviegenre" element={<Genre page={page} updateURL={setURL} setPage={setPage} total={totalPages} genreID={genreID} result={results} setMovie={setMovieInfo} setLoading={setLoading} />} />
 
-        <Route path="/moviesearch" element={<MovieSearch page={page} pageChange={setPage} results={results} total={totalPages} updateURL={setURL} setMovie={setMovieInfo} keyword={keyword} />} />
-      </Routes>
-
-      <Top />
+          <Route path="/moviesearch" element={<MovieSearch page={page} pageChange={setPage} results={results} total={totalPages} updateURL={setURL} setMovie={setMovieInfo} keyword={keyword} />} />
+        </Routes>
+      )}
+      <Top isVisible={isVisible} />
     </>
   )
 }

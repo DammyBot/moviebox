@@ -3,7 +3,7 @@ import Card from '../components/Card'
 import { Link } from 'react-router-dom'
 import Change from '../components/Change'
 
-const Genre = ({ page, updateURL, setPage, total, genreID, result, setMovie }) => {
+const Genre = ({ page, updateURL, setPage, total, genreID, result, setMovie, setLoading }) => {
     return (
         <>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-5'>
@@ -19,7 +19,7 @@ const Genre = ({ page, updateURL, setPage, total, genreID, result, setMovie }) =
                     )
                 })}
             </div>
-            <Change page={page} nav={"genre"} pageChange={setPage} updateURL={updateURL} total={total} genreID={genreID} />
+            <Change page={page} nav={"genre"} pageChange={setPage} updateURL={updateURL} total={total} genreID={genreID} setLoading={setLoading} />
         </>
     )
 }

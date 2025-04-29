@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Change = ({ page, pageChange, total, updateURL, nav, keyword, genreID }) => {
+const Change = ({ page, pageChange, total, updateURL, nav, keyword, genreID, setLoading }) => {
     let url;
 
     function change(value, no) {
+        setLoading(true);
         let updatedPage;
         const changeURL = () => {
             if (nav == "home") {

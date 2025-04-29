@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import Change from '../components/Change'
 
-const Home = ({ result, page, pageChange, total, url, updateURL, setMovie, keyword }) => {
+const Home = ({ result, page, pageChange, total, setLoading, updateURL, setMovie, keyword }) => {
     return (
         <>
             <div className='grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2 max-w-[95vw] m-auto'>
@@ -19,7 +19,7 @@ const Home = ({ result, page, pageChange, total, url, updateURL, setMovie, keywo
                     )
                 })}
             </div>
-            <Change page={page} pageChange={pageChange} total={total} updateURL={updateURL} nav={"home"} keyword={keyword}/>
+            <Change page={page} pageChange={pageChange} total={total} updateURL={updateURL} nav={"home"} keyword={keyword} setLoading={setLoading}/>
         </>
     )
 }

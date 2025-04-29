@@ -11,7 +11,7 @@ const Genre = ({ genre, setURL, setGenreID, setPage }) => {
           setURL(`https://api.themoviedb.org/3/discover/movie?api_key=bc5f58a1141e94b746f74a20c3800ee6&with_genres=${item.id}&page=1`)
         }
         return (
-          <div key={index}>
+          <div key={index} className='text-white'>
             <Link to="/moviegenre" onClick={setLink}>{item.name}</Link>
           </div>
         )
