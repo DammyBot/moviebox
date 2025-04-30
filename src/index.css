@@ -1,18 +1,22 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* font-family: 'Excon', sans-serif; */
+/* font-family: "Montserrat", sans-serif; */
 
 @layer base {
     body {
-        font-family: 'Ranade', sans-serif;
+        font-family: "Noto Serif", serif;
         font-weight: light;
         background-color: black;
+    }
+    li {
+        list-style-type: none;
     }
 }
 
 @layer components {
     .moviebox {
-        @apply font-['Rande'] font-bold text-xl;
+        @apply font-['Montserrat'] font-bold text-xl;
     }
 }
 

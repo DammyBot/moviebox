@@ -34,11 +34,15 @@ function App() {
   // Loading
   const [loading, setLoading] = useState(true);
 
+  const handleLoading = () => {
+    setLoading(false);
+  }
+
   useEffect(() => {
     // Setting the movie after fetch
     fetch(url)
       .then(res => res.json())
-      .then(res => { console.info(res); setResults(res.results); setLoading(false) })
+      .then(res => { console.info(res); setResults(res.results); handleLoading(); })
       .catch(err => console.error(err));
 
     // Setting all the genre available into the genre list
